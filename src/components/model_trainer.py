@@ -42,8 +42,35 @@ class ModelTrainer:
                 "AdaBoost": AdaBoostRegressor(),
                 "K-nearest Regressor": KNeighborsRegressor()
             }
+
+            params ={
+                "Linear Regression": {},
+
+                "Decision Tree": {
+                    'criterion': ['squared_error','friedman_mse','absolute_error','poisson'],
+                    'max_depth': [3,4,5,6,8]
+                    },
+
+                "Random Forest": {
+                    'criterion': ['squared_error','friedman_mse','absolute_error','poisson'],
+                    'max_depth': [3,4,5,6,8]
+                    },
+
+                "Gradient Boost": {
+                    'learning_rate': [0.1, 0.05, 0.5, 0.01]
+                    },
+
+                "AdaBoost": {
+                    'learning_rate': [0.1, 0.05, 0.5, 0.01]
+                    },
+
+                "K-nearest Regressor": {
+                    'n_neighbors': [3,5,7,9]
+                    }
+            }
+
             
-            model_report:dict = evaluate_models(X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test, models=models)
+            model_report:dict = evaluate_models(X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test, models=models, param = params)
 
             best_model_score = max(sorted(model_report.values()))
 
